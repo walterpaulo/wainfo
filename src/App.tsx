@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import { Container } from './App'
+import { Container } from './AppStyle'
 import { Header } from './components/Head'
 
 import GlobalStyle from './styles/global'
 
-function App() {
-
+export const App = ()=>{
   return (
     <Container>
       <GlobalStyle />
@@ -13,5 +12,3 @@ function App() {
     </Container>
   )
 }
-
-export default App
