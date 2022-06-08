@@ -6,7 +6,7 @@ export default createGlobalStyle`
 
 :root{
     --bg-color: #fff;
-    --secondary-bg-color: #eeee;
+    --secondary-bg-color: #565656;
     --text-color-primary: #E77377;
     --text-color-secondary: #363F50;
     --border-color: #565656;
