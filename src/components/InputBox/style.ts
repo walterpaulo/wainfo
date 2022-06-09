@@ -20,7 +20,6 @@ export const LabelBox = styled.label`
 
 export const Input = styled.input`
   border-style: none;
-  border-bottom: 1px solid var(--text-color-secondary);
   padding: 6px 10px 0px 27px;
   font-size: 16px;
 
