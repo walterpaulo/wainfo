@@ -1,4 +1,5 @@
 import React from "react";
+import { Box } from "../../components/Box";
 import { Button } from "../../components/Button/inde";
 import { InputBox } from "../../components/InputBox";
 import { Text4 } from "../../components/Text4";
@@ -29,9 +30,11 @@ export const NewUser = () => {
             <InputBox width="100%" type="text" htmlFor="fpasswordrepeat">
                 Repita-Password *
             </InputBox>
-            <Button>
-                Próxima etapa
-            </Button>
+            <Box>
+                <Button>
+                    Próxima etapa
+                </Button>
+            </Box>
         </Container>
     )
 }
