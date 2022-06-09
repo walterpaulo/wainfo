@@ -7,11 +7,14 @@ export const NewUser = () => {
     return(
         
         <Container>
-            <Text4 color="var(--text-color-primary)">
+            <Text4 color="var(--text-color-primary)" width="100%">
                 Olá, vamos iniciar o cadastro?
             </Text4>
-            <InputBox type="text" htmlFor="fname">
+            <InputBox width="253px" type="text" htmlFor="ffistName">
                 Nome
+            </InputBox>
+            <InputBox width="253px" type="text" htmlFor="flastName">
+                Sobrenome
             </InputBox>
         </Container>
     )

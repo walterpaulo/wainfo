@@ -9,6 +9,7 @@ export const Container = styled.div<IInputBProps | any>`
   flex-direction: column;
   border-radius: 10px;
   padding: 7px 20px;
+  margin-top: 10px;
 `
 
 export const LabelBox = styled.label`
