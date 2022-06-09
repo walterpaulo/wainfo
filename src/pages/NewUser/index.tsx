@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box } from "../../components/Box";
 import { Button } from "../../components/Button/inde";
 import { InputBox } from "../../components/InputBox";
@@ -6,41 +6,75 @@ import { Text4 } from "../../components/Text4";
 import { Container } from "./style";
 
 export const NewUser = () => {
-  const element = (
-    <div>
-      <h1>Hello, world!</h1>
-      <h2>It is {new Date().toLocaleTimeString()}.</h2>
-    </div>
-  );
-  return(
-      
-    <Container>
+  const [active, setActive] = useState("formUser")
+
+  const formUser = ()=>{
+    return <>
+        <Text4 color="var(--text-color-primary)" width="100%">
+          Olá, vamos iniciar o cadastro?
+        </Text4>
+        <InputBox width="253px" type="text" htmlFor="ffistName">
+          Nome *
+        </InputBox>
+        <InputBox width="253px" type="text" htmlFor="flastName">
+          Sobrenome *
+        </InputBox>
+        <InputBox width="100%" type="email" htmlFor="femail">
+          Email *
+        </InputBox>
+        <InputBox width="100%" type="email" htmlFor="femailrepeat">
+          Repita-Email *
+        </InputBox>
+        <InputBox width="100%" type="password" htmlFor="fpassword">
+          Senha *
+        </InputBox>
+        <InputBox width="100%" type="text" htmlFor="fpasswordrepeat">
+          Repita-Password *
+        </InputBox>
+        <Box>
+          <Button onClick={()=>{setActive("formAddress")}}>
+            Próxima etapa
+          </Button>
+        </Box>
+    </>
+  }
+
+  const formAddress = () =>{
+    return <>
       <Text4 color="var(--text-color-primary)" width="100%">
-        Olá, vamos iniciar o cadastro?
+          Agora, vamos seu endereço?
       </Text4>
+      <InputBox width="100%" type="text" htmlFor="femailrepeat">
+        CEP *
+      </InputBox>
+      <InputBox width="100%" type="text" htmlFor="femailrepeat">
+        Rua *
+      </InputBox>
+      <InputBox width="100%" type="text" htmlFor="femailrepeat">
+        Complemento *
+      </InputBox>
       <InputBox width="253px" type="text" htmlFor="ffistName">
-        Nome *
+        Cidade *
       </InputBox>
       <InputBox width="253px" type="text" htmlFor="flastName">
-        Sobrenome *
-      </InputBox>
-      <InputBox width="100%" type="email" htmlFor="femail">
-        Email *
-      </InputBox>
-      <InputBox width="100%" type="email" htmlFor="femailrepeat">
-        Repita-Email *
-      </InputBox>
-      <InputBox width="100%" type="password" htmlFor="fpassword">
-        Senha *
-      </InputBox>
-      <InputBox width="100%" type="text" htmlFor="fpasswordrepeat">
-        Repita-Password *
+        Estado *
       </InputBox>
       <Box>
-        <Button>
-          Próxima etapa
-        </Button>
-      </Box>
-    </Container>  
+          <Button backgroundColor="var(--text-color-secondary)" onClick={()=>{setActive("formAddress")}}>
+            Pular
+          </Button>
+          <Button onClick={()=>{setActive("formAddress")}}>
+            Pronto
+          </Button>
+        </Box>
+
+    </>
+  }
+  return(
+    <Container>
+      {active === "formUser" && formUser()}
+      {active === "formAddress" && formAddress()}
+    </Container>
+    
   )
 }
