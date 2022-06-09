@@ -3,7 +3,7 @@ import { ButtonFull, IButtonProps } from "./style";
 
 export const Button:React.FC<IButtonProps> = (props) => {
 	return(
-		<ButtonFull backgroundColor={props.backgroundColor}>
+		<ButtonFull onClick={props.onClick} backgroundColor={props.backgroundColor}>
 			{props.children}
 		</ButtonFull>
 	)

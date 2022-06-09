@@ -1,8 +1,10 @@
+import React from "react";
 import styled from "styled-components";
 
 export interface IButtonProps{
     backgroundColor?: string;
     children: string;
+    onClick?: React.ReactNode;
 }
 export const ButtonFull = styled.button<IButtonProps>`
     background-color: ${prop => prop.backgroundColor ? prop.backgroundColor : "var(--text-color-primary)"};
