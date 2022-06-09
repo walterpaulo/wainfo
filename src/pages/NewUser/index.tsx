@@ -38,7 +38,6 @@ export const NewUser = () => {
         </Box>
     </>
   }
-
   const formAddress = () =>{
     return <>
       <Text4 color="var(--text-color-primary)" width="100%">
@@ -60,20 +59,27 @@ export const NewUser = () => {
         Estado *
       </InputBox>
       <Box>
-          <Button backgroundColor="var(--text-color-secondary)" onClick={()=>{setActive("formAddress")}}>
-            Pular
-          </Button>
-          <Button onClick={()=>{setActive("formAddress")}}>
-            Pronto
-          </Button>
-        </Box>
-
+        <Button backgroundColor="var(--text-color-secondary)" onClick={()=>{setActive("formFinish")}}>
+          Pular
+        </Button>
+        <Button onClick={()=>{setActive("formFinish")}}>
+          Pronto
+        </Button>
+      </Box>
+    </>
+  }
+  const formFinish = () =>{
+    return <>
+      <Text4 color="var(--text-color-primary)" width="100%">
+          Cadastrado efetuado com sucesso!
+      </Text4>
     </>
   }
   return(
     <Container>
       {active === "formUser" && formUser()}
       {active === "formAddress" && formAddress()}
+      {active === "formFinish" && formFinish()}
     </Container>
     
   )
