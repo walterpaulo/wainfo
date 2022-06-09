@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Container } from './AppStyle'
-import { Header } from './components/Head'
+import { Header } from './components/Header'
 
 import GlobalStyle from './styles/global'
 
