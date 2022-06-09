@@ -1,14 +1,10 @@
-import { useState } from 'react'
-import { Container } from './AppStyle'
-import { Header } from './components/Header'
-
-import GlobalStyle from './styles/global'
+import { Layout } from './components/Layout'
+import { MainRoutes } from './routes'
 
 export const App = ()=>{
   return (
-    <Container>
-      <GlobalStyle />
-      <Header />
-    </Container>
+    <Layout>
+      <MainRoutes />
+    </Layout>
   )
 }
