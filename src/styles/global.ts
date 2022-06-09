@@ -22,5 +22,6 @@ body{
     font-family: 'Inter', sans-serif;
     font-weight: 300;
     font-size: 16px;
+    color: var(--text-color-secondary);
 }
 `

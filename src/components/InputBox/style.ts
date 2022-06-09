@@ -22,6 +22,7 @@ export const Input = styled.input`
   border-style: none;
   padding: 6px 10px 0px 27px;
   font-size: 16px;
+  color: var(--text-color-secondary);
 
   &:focus {
     /* box-shadow: 0 0 0 0; */
