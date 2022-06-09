@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Box } from "../../components/Box";
 import { Button } from "../../components/Button/inde";
 import { InputBox } from "../../components/InputBox";
@@ -73,6 +74,7 @@ export const NewUser = () => {
       <Text4 color="var(--text-color-primary)" width="100%">
           Cadastrado efetuado com sucesso!
       </Text4>
+          <Link to="/">Home</Link>
     </>
   }
   return(
