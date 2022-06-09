@@ -10,7 +10,7 @@ export const NewUser = () => {
             <Text4 color="var(--text-color-primary)">
                 Olá, vamos iniciar o cadastro?
             </Text4>
-            <InputBox type="text" htmlFor="fname" id="fname" >
+            <InputBox type="text" htmlFor="fname">
                 Nome
             </InputBox>
         </Container>
