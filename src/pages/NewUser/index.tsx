@@ -11,10 +11,22 @@ export const NewUser = () => {
                 Olá, vamos iniciar o cadastro?
             </Text4>
             <InputBox width="253px" type="text" htmlFor="ffistName">
-                Nome
+                Nome *
             </InputBox>
             <InputBox width="253px" type="text" htmlFor="flastName">
-                Sobrenome
+                Sobrenome *
+            </InputBox>
+            <InputBox width="100%" type="email" htmlFor="femail">
+                Email *
+            </InputBox>
+            <InputBox width="100%" type="email" htmlFor="femailrepeat">
+                Repita-Email *
+            </InputBox>
+            <InputBox width="100%" type="password" htmlFor="fpassword">
+                Senha *
+            </InputBox>
+            <InputBox width="100%" type="text" htmlFor="fpasswordrepeat">
+                Repita-Password *
             </InputBox>
         </Container>
     )
