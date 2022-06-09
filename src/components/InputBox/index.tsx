@@ -1,19 +1,18 @@
 import React from "react";
-import { Container, LabelBox } from "./style";
+import { Container, LabelBox, Input } from "./style";
 
 export interface IInputBProps {
-  lfor: string;
-  lname: string;
-  type: string;
-  id: string;
-  widht: string;
+  htmlFor?: string;
+  type?: string;
+  width?: string;
+  children?: string;
 }
 
 export const InputBox:React.FC<IInputBProps> = (props) => {
   return(
-    <Container>
-      <LabelBox htmlFor="fname">Nome</LabelBox>
-      <InputBox type="text" id="fname" name="name"/>
+    <Container width={props.width}>
+      <LabelBox htmlFor={props.htmlFor}>{props.children}</LabelBox>
+      <Input type={props.type} id={props.htmlFor} name={props.htmlFor} />
     </Container>
   )
 }
