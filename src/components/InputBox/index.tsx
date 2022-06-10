@@ -1,14 +1,18 @@
-import { useField } from "@unform/core";
 import React, { InputHTMLAttributes, useCallback, useEffect, useRef, useState } from "react";
 import { Container, LabelBox, Input } from "./style";
+
+import { IconBaseProps } from 'react-icons';
+import { FiAlertCircle } from 'react-icons/fi';
+import { useField } from "@unform/core";
 
 interface IInputBProps extends InputHTMLAttributes<HTMLInputElement>{
   name: string;
   type?: string;
   width?: string;
+  icon?: React.ComponentType<IconBaseProps>;
 }
 
-export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, ...rest}) => {
+export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, icon: Icon, ...rest}) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { fieldName, defaultValue, registerField, error } = useField(name)
