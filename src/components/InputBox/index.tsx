@@ -2,13 +2,10 @@ import { useField } from "@unform/core";
 import React, { InputHTMLAttributes, useCallback, useEffect, useRef, useState } from "react";
 import { Container, LabelBox, Input } from "./style";
 
-export interface IInputBProps extends InputHTMLAttributes<HTMLInputElement>{
+interface IInputBProps extends InputHTMLAttributes<HTMLInputElement>{
   name: string;
   type?: string;
   width?: string;
-  children?: string;
-  isErrored: boolean;
-  isFocused: boolean;
 }
 
 export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, ...rest}) => {

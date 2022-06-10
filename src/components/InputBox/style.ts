@@ -1,7 +1,13 @@
-import { IInputBProps } from './index';
 import styled, { css } from "styled-components";
 
-export const Container = styled.div<IInputBProps | any>`
+interface ICantainerProps{
+  isErrored: boolean;
+  isFocused: boolean;
+  width: string;
+
+}
+
+export const Container = styled.div<ICantainerProps | any>`
   border: 1px solid var(--text-color-secondary);
   width: ${prop => prop.width ? prop.width : "294px"};
   height: 42px;
