@@ -9,6 +9,7 @@ export default createGlobalStyle`
     --secondary-bg-color: #565656;
     --text-color-primary: #E77377;
     --text-color-secondary: #363F50;
+    --text-color-error: #c53030;
     --border-color: #565656;
     --border-color-white-clear: #F6D9DC;
 }

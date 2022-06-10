@@ -1,5 +1,5 @@
 import { IInputBProps } from './index';
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Container = styled.div<IInputBProps | any>`
   border: 1px solid var(--text-color-secondary);
@@ -10,6 +10,18 @@ export const Container = styled.div<IInputBProps | any>`
   border-radius: 10px;
   padding: 7px 20px;
   margin-top: 10px;
+
+  ${props =>
+    props.isErrored &&
+    css`
+      /* border-color var(--text-color-primary); */
+    `}
+    
+  ${props =>
+  props.isFocused &&
+  css`
+    border-color var(--text-color-primary);
+  `}
 `
 
 export const LabelBox = styled.label`

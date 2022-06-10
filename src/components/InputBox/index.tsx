@@ -1,5 +1,5 @@
 import { useField } from "@unform/core";
-import React, { InputHTMLAttributes, useEffect, useRef } from "react";
+import React, { InputHTMLAttributes, useCallback, useEffect, useRef, useState } from "react";
 import { Container, LabelBox, Input } from "./style";
 
 export interface IInputBProps extends InputHTMLAttributes<HTMLInputElement>{
@@ -7,13 +7,24 @@ export interface IInputBProps extends InputHTMLAttributes<HTMLInputElement>{
   type?: string;
   width?: string;
   children?: string;
+  isErrored: boolean;
+  isFocused: boolean;
 }
 
 export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, ...rest}) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { fieldName, defaultValue, registerField, error } = useField(name)
+  const [isFocused, setIsFocused] = useState(false);
   
+  const handleInputFocus = useCallback(() => {
+    setIsFocused(true);
+  }, []);
+
+  const handleInputBlur = useCallback(() => {
+    setIsFocused(false);
+  }, []);
+
   useEffect(() => {
     registerField({
       name: fieldName,
@@ -28,12 +39,14 @@ export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, ..
         ref.current.value = ''
       },
     })
-  }, [fieldName, registerField])
+  }, [fieldName, registerField, error])
 
   return(
-    <Container width={width}>
+    <Container isErrored={!!error} isFocused={isFocused} width={width}>
       <LabelBox htmlFor={name}>{children}</LabelBox>
-      <Input 
+      <Input
+      onFocus={handleInputFocus}
+      onBlur={handleInputBlur}
       name={name}
       ref={inputRef}
       type={type? type : "text"}
