@@ -16,6 +16,7 @@ export const Container = styled.div<ICantainerProps | any>`
   border-radius: 10px;
   padding: 7px 20px;
   margin-top: 10px;
+  position: relative;
 
   ${props =>
     props.isErrored &&
@@ -46,4 +47,20 @@ export const Input = styled.input`
     /* box-shadow: 0 0 0 0; */
     outline: 0;
   }
+`
+export const Error = styled.div`
+  /* position: absolute;
+  right: 10px; */
+  cursor: pointer;
+  svg{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+`
+export const P = styled.p`
+  position: absolute;
+  top: -20px;
+  color: var(--text-color-primary);
+  font-weight: 400;
 `

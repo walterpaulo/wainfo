@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes, useCallback, useEffect, useRef, useState } from "react";
-import { Container, LabelBox, Input } from "./style";
+import { Container, LabelBox, Input, Error, P } from "./style";
 
 import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
@@ -44,6 +44,12 @@ export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, ic
 
   return(
     <Container isErrored={!!error} isFocused={isFocused} width={width}>
+      {error && (
+        <Error title={error}>
+          <P>{error}</P>
+          <FiAlertCircle color="var(--text-color-primary)" size={20} />
+        </Error>
+      )}
       <LabelBox htmlFor={name}>{children}</LabelBox>
       <Input
       onFocus={handleInputFocus}
@@ -53,7 +59,6 @@ export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, ic
       type={type? type : "text"}
       {...rest}
       />
-      { error && <span className="error">{error}</span> }
     </Container>
   )
 }
