@@ -7,6 +7,10 @@ interface ICantainerProps{
 
 }
 
+interface IInput{
+  handle?: any;
+}
+
 export const Container = styled.div<ICantainerProps | any>`
   border: 1px solid var(--text-color-secondary);
   width: ${prop => prop.width ? prop.width : "294px"};
@@ -37,7 +41,7 @@ export const LabelBox = styled.label`
 
 `
 
-export const Input = styled.input`
+export const Input = styled.input<IInput>`
   border-style: none;
   padding: 6px 10px 0px 27px;
   font-size: 16px;

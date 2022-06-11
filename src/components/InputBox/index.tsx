@@ -9,22 +9,31 @@ interface IInputBProps extends InputHTMLAttributes<HTMLInputElement>{
   name: string;
   type?: string;
   width?: string;
+  handle?: boolean;
   icon?: React.ComponentType<IconBaseProps>;
 }
 
-export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, icon: Icon, ...rest}) => {
+export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, handle, icon: Icon, ...rest}) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { fieldName, defaultValue, registerField, error } = useField(name)
   const [isFocused, setIsFocused] = useState(false);
+  const [capture, setCapture] = useState(false);
   
   const handleInputFocus = useCallback(() => {
     setIsFocused(true);
+    handle && setCapture(true)
   }, []);
 
   const handleInputBlur = useCallback(() => {
     setIsFocused(false);
   }, []);
+
+  const handleMaskCEP:any = (e: any) =>{
+    if(capture){
+      console.log(e.target.value)
+    } 
+  }
 
   useEffect(() => {
     registerField({
@@ -54,6 +63,7 @@ export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, ic
       <Input
       onFocus={handleInputFocus}
       onBlur={handleInputBlur}
+      onChange={handleMaskCEP}
       name={name}
       ref={inputRef}
       type={type? type : "text"}
