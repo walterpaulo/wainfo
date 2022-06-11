@@ -4,6 +4,7 @@ import { Container, LabelBox, Input, Error, P } from "./style";
 import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
 import { useField } from "@unform/core";
+import { getAddress } from "../../services/api/cep";
 
 interface IInputBProps extends InputHTMLAttributes<HTMLInputElement>{
   name: string;
@@ -37,7 +38,9 @@ export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, ha
     
     if(capture && value.length == 8){
       const CEP = value.replace(/[^\d]/g, "").replace(/(\d{5})(\d{3})/, "$1-$2")
-      console.log(CEP, value +' '+ '#'+object.id)
+      // console.log(CEP, value +' '+ '#'+object.id)
+      getAddress(value)
+
       cepInput.value = CEP
     } 
   }
