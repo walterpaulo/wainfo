@@ -11,7 +11,7 @@ import * as Yup from 'yup';
 import getValidationErrors from "../../util/getValidationErrors";
 
 
-interface SignInFormData {
+interface IUserInFormData {
   ffirtName: string;
   flastName: string;
   femail: string;
@@ -19,13 +19,20 @@ interface SignInFormData {
   fpassword: string;
   fpasswordRepeat: string;
 }
+interface IAddressFormData{
+  fcep: number;
+  flogradouro: string;
+  fcomplement: string;
+  fcity: string;
+  fuf: string
+}
 
 export const NewUser = () => {
   const [active, setActive] = useState("formUser")
 
   const formRef = useRef<FormHandles>(null);
 
-  async function handleSubmit(data: SignInFormData) {
+  async function handleSubmit(data: IUserInFormData) {
     try {
       const schema = Yup.object().shape({
         ffirtName: Yup.string().required("Informe o nome"),
@@ -34,12 +41,32 @@ export const NewUser = () => {
         femailRepeat: Yup.string().min(6)
           .oneOf([Yup.ref('femail'), null], "O email inserido não corresponde")
           .required('Confirmar email é necessário'),
-        // femailRepeat: Yup.string().email().required("Informe E-mail"),
         fpassword: Yup.string().min(6).required("no mínimo 6 carecteres"),
         fpasswordRepeat: Yup.string().min(6)
           .oneOf([Yup.ref('fpassword'), null], "As senhas não correspondem")
           .required('Confirmar senha é necessária'),
-        // fpasswordRepeat: Yup.string().min(6).required("no mínimo 6 carecteres"),
+      });
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+      // Validation passed
+      setActive("formAddress")
+      console.log(data);
+    } catch (err) {
+      if (err instanceof Yup.ValidationError) {
+        const errors = getValidationErrors(err);
+
+        formRef.current?.setErrors(errors);
+
+        return;
+      }
+    }
+  }
+  async function handleAddressSubmit(data: IAddressFormData) {
+    try {
+      const schema = Yup.object().shape({
+        fcep: Yup.string().min(8, 'O cep deve ter no mínimo 8 caracteres')
+          .max(8, 'O cep deve ter no máximo 8 caracteres').required("Informe o CEP"),
       });
       await schema.validate(data, {
         abortEarly: false,
@@ -95,29 +122,31 @@ export const NewUser = () => {
       <Text4 color="var(--text-color-primary)" width="100%">
           Agora, vamos seu endereço?
       </Text4>
-      {/* <InputBox width="100%" type="text" name="femailrepeat">
-        CEP *
-      </InputBox>
-      <InputBox width="100%" type="text" name="femailrepeat">
-        Rua *
-      </InputBox>
-      <InputBox width="100%" type="text" name="femailrepeat">
-        Complemento *
-      </InputBox>
-      <InputBox width="253px" type="text" name="ffistName">
-        Cidade *
-      </InputBox>
-      <InputBox width="253px" type="text" name="flastName">
-        Estado *
-      </InputBox> */}
-      <Box>
-        <Button backgroundColor="var(--text-color-secondary)" onClick={()=>{setActive("formFinish")}}>
-          Pular
-        </Button>
-        <Button onClick={()=>{setActive("formFinish")}}>
-          Pronto
-        </Button>
-      </Box>
+      <Form ref={formRef} onSubmit={handleAddressSubmit}>
+        <InputBox width="100%" type="text" name="fcep">
+          CEP *
+        </InputBox>
+        <InputBox width="100%" type="text" name="flogradouro">
+          Rua
+        </InputBox>
+        <InputBox width="100%" type="text" name="fcomplement">
+          Complemento
+        </InputBox>
+        <InputBox width="253px" type="text" name="fcity">
+          Cidade
+        </InputBox>
+        <InputBox width="253px" type="text" name="fuf">
+          Estado
+        </InputBox>
+        <Box>
+          <Button backgroundColor="var(--text-color-secondary)" onClick={()=>{setActive("formFinish")}}>
+            Pular
+          </Button>
+          <Button onClick={()=>{()=>{handleAddressSubmit}}}>
+            Pronto
+          </Button>
+        </Box>
+      </Form>
     </>
   }
   const formFinish = () =>{
