@@ -31,9 +31,15 @@ export const NewUser = () => {
         ffirtName: Yup.string().required("Informe o nome"),
         flastName: Yup.string().required("Informe o sobrenome"),
         femail: Yup.string().email().required("Informe E-mail"),
-        femailRepeat: Yup.string().email().required("Informe E-mail"),
+        femailRepeat: Yup.string().min(6)
+          .oneOf([Yup.ref('femail'), null], "O email inserido não corresponde")
+          .required('Confirmar email é necessário'),
+        // femailRepeat: Yup.string().email().required("Informe E-mail"),
         fpassword: Yup.string().min(6).required("no mínimo 6 carecteres"),
-        fpasswordRepeat: Yup.string().min(6).required("no mínimo 6 carecteres"),
+        fpasswordRepeat: Yup.string().min(6)
+          .oneOf([Yup.ref('fpassword'), null], "As senhas não correspondem")
+          .required('Confirmar senha é necessária'),
+        // fpasswordRepeat: Yup.string().min(6).required("no mínimo 6 carecteres"),
       });
       await schema.validate(data, {
         abortEarly: false,
