@@ -4,11 +4,6 @@ interface ICantainerProps{
   isErrored: boolean;
   isFocused: boolean;
   width: string;
-
-}
-
-interface IInput{
-  handle?: any;
 }
 
 export const Container = styled.div<ICantainerProps | any>`
@@ -41,7 +36,7 @@ export const LabelBox = styled.label`
 
 `
 
-export const Input = styled.input<IInput>`
+export const Input = styled.input`
   border-style: none;
   padding: 6px 10px 0px 27px;
   font-size: 16px;

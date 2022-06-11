@@ -10,10 +10,11 @@ interface IInputBProps extends InputHTMLAttributes<HTMLInputElement>{
   type?: string;
   width?: string;
   handle?: boolean;
+  max?: number;
   icon?: React.ComponentType<IconBaseProps>;
 }
 
-export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, handle, icon: Icon, ...rest}) => {
+export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, handle, max, icon: Icon, ...rest}) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { fieldName, defaultValue, registerField, error } = useField(name)
@@ -30,8 +31,14 @@ export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, ha
   }, []);
 
   const handleMaskCEP:any = (e: any) =>{
-    if(capture){
-      console.log(e.target.value)
+    const value = e.target.value
+    const object = e.target || e.srcElement;
+    const cepInput:any = document.querySelector("#"+object.id);
+    
+    if(capture && value.length == 8){
+      const CEP = value.replace(/[^\d]/g, "").replace(/(\d{5})(\d{3})/, "$1-$2")
+      console.log(CEP, value +' '+ '#'+object.id)
+      cepInput.value = CEP
     } 
   }
 
@@ -66,6 +73,8 @@ export const InputBox:React.FC<IInputBProps> = ({name, type, width, children, ha
       onChange={handleMaskCEP}
       name={name}
       ref={inputRef}
+      id={"i"+name}
+      maxLength={max}
       type={type? type : "text"}
       {...rest}
       />

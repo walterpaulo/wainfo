@@ -123,7 +123,7 @@ export const NewUser = () => {
           Agora, vamos seu endereço?
       </Text4>
       <Form ref={formRef} onSubmit={handleAddressSubmit}>
-        <InputBox handle={true} width="100%" type="text" name="fcep">
+        <InputBox handle={true} max={9} width="100%" type="text" name="fcep">
           CEP *
         </InputBox>
         <InputBox width="100%" type="text" name="flogradouro">
