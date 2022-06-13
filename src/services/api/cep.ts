@@ -22,19 +22,23 @@ export const getAddress:any = async (cep:string) => {
     fcityInput.value = ''
     fcityInput.value = ''
     fufInput.value = ''
-    if(cep.length == 8){
-        fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            // console.log(data)
-            flogradouroInput.value = data.logradouro
-            fcomplementInput.value = data.complemento
-            fcityInput.value = data.localidade
-            fufInput.value = data.uf
-        })
-        .catch(error => {
-            // handle the error
-            // console.error("error no CEP")
-        });
+
+    const cepNovo = apiUrl
+
+    if(cep.length === 8){
+        console.log('contador', cep.length)
+        const response = await fetch(cepNovo)
+        const data = await response.json();
+
+        if(data.erro ==='true'){
+    
+         return;
+        }
+
+        flogradouroInput.value = data.logradouro
+        fcomplementInput.value = data.complemento
+        fcityInput.value = data.localidade
+        fufInput.value = data.uf
+
     }
 }
