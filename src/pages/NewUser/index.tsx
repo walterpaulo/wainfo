@@ -49,7 +49,6 @@ export const NewUser = () => {
       await schema.validate(data, {
         abortEarly: false,
       });
-      // Validation passed
       setActive("formAddress")
       console.log(data);
     } catch (err) {
@@ -71,9 +70,7 @@ export const NewUser = () => {
       await schema.validate(data, {
         abortEarly: false,
       });
-      // Validation passed
       setActive("formFinish")
-      // setActive("formAddress")
       console.log(data);
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
@@ -85,60 +82,52 @@ export const NewUser = () => {
       }
     }
   }
+  const listFields = [
+    {name: "ffirtName", width: "253px", type: "text", value:"Nome *"},
+    {name: "flastName", width: "253px", type: "text", value:"Sobrenome *"},
+    {name: "femail", width: "100%", type: "email", value:"Email *"},
+    {name: "femailRepeat", width: "100%", type: "email", value:"Repita o email *"},
+    {name: "fpassword", width: "100%", type: "password", value:"Senha *"},
+    {name: "fpasswordRepeat", width: "100%", type: "password", value:"Repita a senha *"},
+  ]
   const formUser = ()=>{
     return <>
         <Text4 color="var(--text-color-primary)" width="100%">
           Olá, vamos iniciar o cadastro?
         </Text4>
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <InputBox name="ffirtName" width="253px">
-            Nome *
+          {listFields.map((field,i)=>(
+            <InputBox key={i} name={field.name} width={field.width} type={field.type} >
+            {field.value}
           </InputBox>
-          <InputBox name="flastName" width="253px">
-            Sobrenome *
-          </InputBox>
-          <InputBox name="femail" width="100%" type="email" >
-            Email *
-          </InputBox>
-          <InputBox name="femailRepeat" width="100%" type="email" >
-            Repita-Email *
-          </InputBox>
-          <InputBox name="fpassword" width="100%" type="password" >
-            Senha *
-          </InputBox>
-          <InputBox name="fpasswordRepeat" width="100%" type="password">
-            Repita-Password *
-          </InputBox>
+          ))}
           <Box>
             <Button onClick={()=>{handleSubmit}}>
               Próxima etapa
             </Button>
           </Box>
         </Form>
-        
     </>
   }
+  const listfieldsAddress = [
+    {name: "fcep", handle:true, max:9 ,width: "100%", type: "text", value:"CEP *"},
+    {name: "flogradouro", width: "100%", type: "text", value:"Rua"},
+    {name: "fcomplement", width: "100%", type: "text", value:"Complemento"},
+    {name: "fcity", width: "253px", type: "text", value:"Cidade"},
+    {name: "fuf", width: "253px", type: "text", value:"Estado"},
+  ]
   const formAddress = () =>{
     return <>
       <Text4 color="var(--text-color-primary)" width="100%">
           Agora, vamos seu endereço?
       </Text4>
       <Form ref={formRef} onSubmit={handleAddressSubmit}>
-        <InputBox handle={true} max={9} width="100%" type="text" name="fcep">
-          CEP *
+        { listfieldsAddress.map((field,i)=>(
+          <InputBox key={i} handle={field.handle} max={field.max} 
+            width={field.width} type={field.type} name={field.name}>
+          {field.value}
         </InputBox>
-        <InputBox width="100%" type="text" name="flogradouro">
-          Rua
-        </InputBox>
-        <InputBox width="100%" type="text" name="fcomplement">
-          Complemento
-        </InputBox>
-        <InputBox width="253px" type="text" name="fcity">
-          Cidade
-        </InputBox>
-        <InputBox width="253px" type="text" name="fuf">
-          Estado
-        </InputBox>
+        ))}
         <Box>
           <Button backgroundColor="var(--text-color-secondary)" onClick={()=>{setActive("formFinish")}}>
             Pular
