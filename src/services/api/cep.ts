@@ -25,8 +25,7 @@ export const getAddress:any = async (cep:string) => {
 
     const cepNovo = apiUrl
 
-    if(cep.length === 8){
-        console.log('contador', cep.length)
+    if(cep.length === 8 && !cep.match("-")){
         const response = await fetch(cepNovo)
         const data = await response.json();
 
