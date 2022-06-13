@@ -4,5 +4,9 @@ import styled from "styled-components";
 export const H2 = styled.h2<ITextProps>`
     color: ${prop => prop.color ? prop.color : ''};
     font-weight: 700;
-    font-size: ${prop => prop.size ? prop.size : ''} ;
+    font-size: ${prop => prop.size ? prop.size : ''};
+
+    @media (max-width: 616px) {
+    font-size: 50px;
+  }
 `

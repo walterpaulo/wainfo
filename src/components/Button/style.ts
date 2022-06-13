@@ -24,4 +24,8 @@ export const ButtonFull = styled.button<IButtonProps>`
         color: #fff;
         box-shadow: 0 0 5px var(--text-color-secondary);
     }
+    @media (max-width: 612px){
+    width: 98vw;
+    margin: 0 10px;
+  }
 `
