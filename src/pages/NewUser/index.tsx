@@ -73,7 +73,7 @@ export const NewUser = () => {
       });
       // Validation passed
       setActive("formFinish")
-      setActive("formAddress")
+      // setActive("formAddress")
       console.log(data);
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
