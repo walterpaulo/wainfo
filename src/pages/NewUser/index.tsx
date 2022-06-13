@@ -65,13 +65,14 @@ export const NewUser = () => {
   async function handleAddressSubmit(data: IAddressFormData) {
     try {
       const schema = Yup.object().shape({
-        fcep: Yup.string().min(8, 'O cep deve ter no mínimo 8 caracteres')
-          .max(8, 'O cep deve ter no máximo 8 caracteres').required("Informe o CEP"),
+        fcep: Yup.string().min(9, 'O cep deve ter no mínimo 8 caracteres')
+          .max(9, 'O cep deve ter no máximo 8 caracteres').required("Informe o CEP"),
       });
       await schema.validate(data, {
         abortEarly: false,
       });
       // Validation passed
+      setActive("formFinish")
       setActive("formAddress")
       console.log(data);
     } catch (err) {
@@ -79,7 +80,7 @@ export const NewUser = () => {
         const errors = getValidationErrors(err);
 
         formRef.current?.setErrors(errors);
-
+      setActive("formAddress")
         return;
       }
     }
