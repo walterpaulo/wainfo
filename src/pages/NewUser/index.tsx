@@ -29,7 +29,6 @@ interface IAddressFormData{
 
 export const NewUser = () => {
   const [active, setActive] = useState("formUser")
-
   const formRef = useRef<FormHandles>(null);
 
   async function handleSubmit(data: IUserInFormData) {
@@ -54,9 +53,7 @@ export const NewUser = () => {
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
-
         formRef.current?.setErrors(errors);
-
         return;
       }
     }
@@ -153,6 +150,5 @@ export const NewUser = () => {
       {active === "formAddress" && formAddress()}
       {active === "formFinish" && formFinish()}
     </Container>
-    
   )
 }

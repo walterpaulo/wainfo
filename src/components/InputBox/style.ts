@@ -8,8 +8,9 @@ interface ICantainerProps{
 
 export const Container = styled.div<ICantainerProps | any>`
   border: 1px solid var(--text-color-secondary);
-  width: ${prop => prop.width ? prop.width : "294px"};
+  width: ${prop => prop.width ? prop.width : "200px"};
   height: 42px;
+  max-height: 90px;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -28,12 +29,14 @@ export const Container = styled.div<ICantainerProps | any>`
   css`
     border-color var(--text-color-primary);
   `}
+  @media (max-width: 616px) {
+    width: calc(100vw - 64px);
+  }
 `
 
 export const LabelBox = styled.label`
   font-weight: 400;
   margin-bottom: 5px;
-
 `
 
 export const Input = styled.input`
@@ -43,13 +46,13 @@ export const Input = styled.input`
   color: var(--text-color-secondary);
 
   &:focus {
-    /* box-shadow: 0 0 0 0; */
     outline: 0;
+  }
+  @media (max-width: 612px){
+    padding: 0;
   }
 `
 export const Error = styled.div`
-  /* position: absolute;
-  right: 10px; */
   cursor: pointer;
   svg{
     position: absolute;
@@ -62,4 +65,8 @@ export const P = styled.p`
   top: -20px;
   color: var(--text-color-primary);
   font-weight: 400;
+
+  @media (max-width: 227px){
+    font-size: 9px;
+  }
 `
