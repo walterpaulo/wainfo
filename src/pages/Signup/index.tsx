@@ -7,9 +7,9 @@ import { Text4 } from "../../ shared /components/Text4";
 import { Container, InfoLogin } from "./style";
 import * as Yup from "yup";
 import getValidationErrors from "../../util/getValidationErrors";
-import { Link } from "react-router-dom";
-import { api } from "../../services/api/api";
+import { Link, useNavigate } from "react-router-dom";
 import Message from "../../ shared /components/Message";
+import { createUser } from "../../ shared /hooks/util";
 
 interface SignUnFormData {
   name: string;
@@ -17,51 +17,37 @@ interface SignUnFormData {
   password: string;
 }
 
+const schema = Yup.object().shape({
+  name: Yup.string().required("Nome é obrigatório"),
+  email: Yup.string().email().required("Email obrigatório"),
+  password: Yup.string()
+    .min(6)
+    .required("Senha inserir mínimo caractéres"),
+});
+
 function Signup() {
   const formRef = useRef<FormHandles>(null);
   const [errors, setErros] = useState("");
-
-  async function postUser(user: object) {
-    const response = await fetch(`${api}/users`, {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
-
-    const data = await response.json();
-    const status = response.status;
-
-    return { data, status };
-  }
+  let navigate = useNavigate();
 
   async function handleSubmit(data: SignUnFormData) {
     try {
-      const schema = Yup.object().shape({
-        name: Yup.string().required("Nome é obrigatório"),
-        email: Yup.string().email().required("Email obrigatório"),
-        password: Yup.string()
-          .min(6)
-          .required("Senha inserir mínimo caractéres"),
-      });
       await schema.validate(data, {
         abortEarly: false,
       });
-      const res = postUser(data);
+      const res = createUser(data);
       setErros("");
-      // res.then((res) => {
-      //   if (res.status === 401) {
-
-      //     // `Email de usuários ou Senha incorreta. Tente novamente!`
-      //     return setErros(
-      //       res.data.errors
-      //     );
-      //   }
-      //   res.status === 500 && setErros("Ops! Tenta mais tarde!")
-      // }).catch((e)=>{
-
-      // });
+      res
+        .then((res) => {
+          if (res.status === 401) {
+            // `Email de usuários ou Senha incorreta. Tente novamente!`
+            return setErros(res.data.errors);
+          }
+          console.log(res.data.email[0]);
+          res.status === 422 && setErros(res.data.email[0]);
+          res.status === 201 && setErros("Cadastro com sucesso!");
+        })
+        .catch((e) => {});
       formRef.current?.reset();
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
