@@ -1,4 +1,4 @@
-import { Layout } from './components/Layout'
+import { Layout } from './ shared /components/Layout'
 import { MainRoutes } from './routes'
 
 export const App = ()=>{

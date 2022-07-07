@@ -1,7 +1,7 @@
 import React from "react";
 import { Header } from "../Header";
 import { Container, Main } from "./style";
-import GlobalStyle from '../../styles/global'
+import GlobalStyle from '../../../styles/global'
 
 type LayoutProps = {
     children:JSX.Element

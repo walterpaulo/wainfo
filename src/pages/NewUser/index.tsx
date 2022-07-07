@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Box } from "../../components/Box";
+import { Box } from "../../ shared /Box";
 import { Form } from '@unform/web'
-import { Button } from "../../components/Button/inde";
-import { InputBox } from "../../components/InputBox";
-import { Text4 } from "../../components/Text4";
+import { Button } from "../../ shared /components/Button/inde";
+import { InputBox } from "../../ shared /components/InputBox";
+import { Text4 } from "../../ shared /components/Text4";
 import { Container } from "./style";
 import { FormHandles } from "@unform/core";
 import * as Yup from 'yup';

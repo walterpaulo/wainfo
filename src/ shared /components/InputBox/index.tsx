@@ -4,7 +4,7 @@ import { Container, LabelBox, Input, Error, P } from "./style";
 import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
 import { useField } from "@unform/core";
-import { getAddress } from "../../services/api/cep";
+import { getAddress } from "../../../services/api/cep";
 
 interface IInputBProps extends InputHTMLAttributes<HTMLInputElement>{
   name: string;
