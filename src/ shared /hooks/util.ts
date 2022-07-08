@@ -13,3 +13,18 @@ export const createUser = async (user: object) => {
 
   return { data, status };
 };
+
+export const LoginRequest = async (user: object) => {
+  const response = await fetch(`${api}auth/login`, {
+    method: "POST",
+    body: JSON.stringify(user),
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+  const data = await response.json();
+  const status = response.status;
+
+  return { data, status };
+};
+
