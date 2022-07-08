@@ -1,11 +1,17 @@
-import React, { createContext, useCallback, useState, useContext } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useState,
+  useContext,
+  useEffect,
+} from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthState, IAuthProvider, SignInCredentials } from "./types";
-import { loginRequest } from "./util";
-
+import { getUserLocalStorage, loginRequest, setUserLocalStorage } from "./util";
 
 interface AuthContextData {
   // eslint-disable-next-line @typescript-eslint/ban-types
-  user: object;
+  user?: object;
   signInLogin(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
 }
@@ -13,39 +19,41 @@ interface AuthContextData {
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
-  const [data, setData] = useState<AuthState>(() => {
-    const token = localStorage.getItem("@u:token");
-    const exp = localStorage.getItem("@u:exp");
+  const [data, setData] = useState<AuthState>();
+  const navigate = useNavigate()
 
-    if (token && exp) {
-      return { token, exp: JSON.parse(exp) };
+  useEffect(() => {
+    const local = getUserLocalStorage();
+    const token = local?.token;
+    if (local) {
+      setData({ token, exp: local.exp });
     }
-
-    return {} as AuthState;
-  });
-
-  const signInLogin = useCallback(async ({ email, password }: SignInCredentials) => {
-    const response = await loginRequest({ email, password });
-
-    const { token, exp } = response.data;
-
-    console.log(response);
-
-    localStorage.setItem("@u:token", token);
-    localStorage.setItem("@u:exp", JSON.stringify(exp));
-
-    setData({ token, exp });
   }, []);
+
+  const signInLogin = useCallback(
+    async ({ email, password }: SignInCredentials) => {
+      const response = await loginRequest({ email, password });
+
+      const { token, exp } = response.data;
+
+      console.log(response);
+      setUserLocalStorage({ token, exp });
+
+      setData({ token, exp });
+    },
+    []
+  );
 
   const signOut = useCallback(() => {
     localStorage.removeItem("@u:token");
     localStorage.removeItem("@u:exp");
 
     setData({} as AuthState);
+    navigate("/")
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data , signInLogin, signOut }}>
+    <AuthContext.Provider value={{ user: data, signInLogin, signOut }}>
       {children}
     </AuthContext.Provider>
   );

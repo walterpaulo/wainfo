@@ -10,6 +10,7 @@ import getValidationErrors from "../../util/getValidationErrors";
 import { Link, useNavigate } from "react-router-dom";
 import Message from "../../ shared /components/Message";
 import { createUser } from "../../ shared /hooks/util";
+import { Layout } from "../../ shared /components/Layout";
 
 interface SignUnFormData {
   name: string;
@@ -20,9 +21,7 @@ interface SignUnFormData {
 const schema = Yup.object().shape({
   name: Yup.string().required("Nome é obrigatório"),
   email: Yup.string().email().required("Email obrigatório"),
-  password: Yup.string()
-    .min(6)
-    .required("Senha inserir mínimo caractéres"),
+  password: Yup.string().min(6).required("Senha inserir mínimo caractéres"),
 });
 
 function Signup() {
@@ -60,20 +59,22 @@ function Signup() {
     }
   }
   return (
-    <Container>
-      <Text4>Criar nova conta</Text4>
-      <Message text={errors} />
-      <Form ref={formRef} onSubmit={handleSubmit}>
-        <InputBox name="name" type="text" placeholder="Nome" />
-        <InputBox name="email" type="text" placeholder="Email" />
-        <InputBox name="password" type="password" placeholder="Senha" />
-        <Button>Criar</Button>
-      </Form>
-      <InfoLogin>
-        <Text4>Já tenho conta!</Text4>
-        <Link to="/login">&nbsp;Login</Link>
-      </InfoLogin>
-    </Container>
+    <Layout>
+      <Container>
+        <Text4>Criar nova conta</Text4>
+        <Message text={errors} />
+        <Form ref={formRef} onSubmit={handleSubmit}>
+          <InputBox name="name" type="text" placeholder="Nome" />
+          <InputBox name="email" type="text" placeholder="Email" />
+          <InputBox name="password" type="password" placeholder="Senha" />
+          <Button>Criar</Button>
+        </Form>
+        <InfoLogin>
+          <Text4>Já tenho conta!</Text4>
+          <Link to="/login">&nbsp;Login</Link>
+        </InfoLogin>
+      </Container>
+    </Layout>
   );
 }
 

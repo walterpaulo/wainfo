@@ -5,12 +5,14 @@ import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 
 export const MainRoutes = () => {
-    return(
-        <Routes>
-            <Route path = "/newUser" element={<NewUser/>}/>signup
-            <Route path = "/login" element={<Signin />}/>
-            <Route path = "/signup" element={<Signup />}/>
-            <Route path = "*" element={<Home/>}/>
-        </Routes>
-    )
-}
+  return (
+    <Routes>
+      <Route path="/newUser" element={<NewUser />} />
+      signup
+      <Route path="/" element={<Signin />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/home" element={<Home />} />
+      <Route path="*" element={<Signin />} />
+    </Routes>
+  );
+};

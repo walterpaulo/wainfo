@@ -1,12 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "../../ shared /components/Button/inde";
+import { LayoutProtect } from "../../ shared /components/LayoutProtect";
+import { useAuth } from "../../ shared /hooks/Auth";
 import { Container } from "./style";
 
 export const Home = () => {
-    return(
-        <Container>
-            <Link to="/newUser">Novo Usuário</Link>
-        </Container>
-    )
-}
+  const auth = useAuth()
+
+  return (
+    <LayoutProtect>
+      <Container>
+        <button onClick={auth.signOut}>Sair</button>
+        <Link to="/newUser">Novo Usuário</Link>
+      </Container>
+    </LayoutProtect>
+  );
+};
