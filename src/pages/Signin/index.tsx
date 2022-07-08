@@ -9,6 +9,8 @@ import getValidationErrors from "../../util/getValidationErrors";
 import { Text4 } from "../../ shared /components/Text4";
 import { Link } from "react-router-dom";
 import Message from "../../ shared /components/Message";
+import { loginRequest } from "../../ shared /hooks/util";
+import { useAuth } from "../../ shared /hooks/Auth";
 
 interface SignInFormData {
   name: string;
@@ -23,15 +25,17 @@ const schema = Yup.object().shape({
 function Signin() {
   const formRef = useRef<FormHandles>(null);
   const [errors, setErros] = useState("");
+  const auth = useAuth()
 
   async function handleSubmit(data: SignInFormData) {
+    setErros("")
     try {
       await schema.validate(data, {
         abortEarly: false,
       });
       // Validation passed
-      setErros("teste");
-      console.log(data);
+      const res = auth.signInLogin(data)
+      
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);

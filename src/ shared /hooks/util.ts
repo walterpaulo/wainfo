@@ -14,8 +14,8 @@ export const createUser = async (user: object) => {
   return { data, status };
 };
 
-export const LoginRequest = async (user: object) => {
-  const response = await fetch(`${api}auth/login`, {
+export const loginRequest = async (user: object) => {
+  const response = await fetch(`${api}/auth/login`, {
     method: "POST",
     body: JSON.stringify(user),
     headers: {
