@@ -20,8 +20,8 @@ export const Header = () => {
         </Text2>
         <div>
           {auth.islogged && (
-            <>
-              <Avatar onClick={showPerfil}>wp</Avatar>
+            <Avatar onClick={showPerfil}>
+              wp
               {isPerfil && (
                 <PerfilUser>
                   <ul>
@@ -34,7 +34,7 @@ export const Header = () => {
                   </ul>
                 </PerfilUser>
               )}
-            </>
+            </Avatar>
           )}
         </div>
       </HeaderBox>

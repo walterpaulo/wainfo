@@ -51,8 +51,8 @@ export const Avatar = styled.div`
 export const PerfilUser = styled.div`
   background-color: var(--text-color-secondary);
   position: absolute;
-  top: 60px;
-  right: 12px;
+  top: 40px;
+  right: 4px;
   color: var(--bg-color);
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
   display: flex;
