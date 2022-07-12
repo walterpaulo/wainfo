@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FaSignOutAlt, FaUserEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/Auth";
 import { Text2 } from "../Text2";
@@ -23,10 +24,14 @@ export const Header = () => {
               <PerfilUser>
                 <ul>
                   <li>
-                    <Link to="/newUser">Editar</Link>
+                    <Link to="/newUser">
+                      <FaUserEdit />
+                    </Link>
                   </li>
                   <li>
-                    <button onClick={auth.signOut}>Sair</button>
+                    <button onClick={auth.signOut}>
+                      <FaSignOutAlt />
+                    </button>
                   </li>
                 </ul>
               </PerfilUser>

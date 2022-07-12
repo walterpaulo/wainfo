@@ -48,7 +48,7 @@ export const Avatar = styled.div`
   align-items: center;
   position: relative;
   cursor: pointer;
-  
+
   :hover {
     div {
       display: flex;
@@ -78,6 +78,12 @@ export const PerfilUser = styled.div`
         color: var(--bg-color);
         font-weight: 400;
         padding: 0 1.9em;
+        svg{
+          size: 24px;
+          width: 24px;
+          height: 24px;
+        }
+
         :hover {
           color: var(--text-color-secondary);
         }
@@ -89,9 +95,13 @@ export const PerfilUser = styled.div`
       button {
         padding: 1px 40px;
         font-weight: 400;
-        width: 100%;
-        :hover {
+        :hover{
           color: var(--text-color-secondary);
+        }
+        svg{
+          width: 24px;
+          height: 24px;
+        }
         }
       }
     }
