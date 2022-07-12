@@ -63,25 +63,32 @@ export const PerfilUser = styled.div`
   right: 4px;
   color: var(--bg-color);
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
-  /* display: flex; */
+  border-radius: 4px;
   justify-content: center;
-  padding: 1em 0;
-
+  max-width: 128px;
+  
   ul {
+    margin: 1em 0;
     list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
     li {
+      display: flex;
+      justify-content: space-around;
       text-decoration: none;
-      width: 100%;
       text-align: center;
       a {
         text-decoration: none;
         color: var(--bg-color);
         font-weight: 400;
         padding: 0 1.9em;
+        display: flex;
+        gap: 4px;
         svg{
-          size: 24px;
-          width: 24px;
-          height: 24px;
+          size: 20px;
+          width: 20px;
+          height: 20px;
         }
 
         :hover {
@@ -93,14 +100,16 @@ export const PerfilUser = styled.div`
         color: var(--text-color-secondary);
       }
       button {
-        padding: 1px 40px;
+        padding: 0px 40px;
         font-weight: 400;
+        display: flex;
+        gap: 4px;
         :hover{
           color: var(--text-color-secondary);
         }
         svg{
-          width: 24px;
-          height: 24px;
+          width: 20px;
+          height: 20px;
         }
         }
       }

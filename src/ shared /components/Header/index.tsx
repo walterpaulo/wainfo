@@ -26,11 +26,13 @@ export const Header = () => {
                   <li>
                     <Link to="/newUser">
                       <FaUserEdit />
+                      Editar
                     </Link>
                   </li>
                   <li>
                     <button onClick={auth.signOut}>
                       <FaSignOutAlt />
+                      Sair
                     </button>
                   </li>
                 </ul>
