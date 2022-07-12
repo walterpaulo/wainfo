@@ -37,16 +37,19 @@ function Signin() {
       });
       // Validation passed
       const res = auth.signInLogin(data);
-      navigate("/home");
+      console.log("login", auth.user);
+      if (await res) {
+        navigate("/home");
+        return;
+      }
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const errors = getValidationErrors(err);
-
         formRef.current?.setErrors(errors);
-
         return;
       }
     }
+    setErros("E-mail e/ou senha inválidos");
     formRef.current?.reset();
   }
   return (

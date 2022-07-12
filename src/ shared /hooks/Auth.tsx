@@ -12,7 +12,7 @@ import { getUserLocalStorage, loginRequest, setUserLocalStorage } from "./util";
 interface AuthContextData {
   // eslint-disable-next-line @typescript-eslint/ban-types
   user?: object;
-  signInLogin(credentials: SignInCredentials): Promise<void>;
+  signInLogin(credentials: SignInCredentials): Promise<boolean>;
   signOut(): void;
 }
 
@@ -20,7 +20,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
   const [data, setData] = useState<AuthState>();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const local = getUserLocalStorage();
@@ -33,13 +33,15 @@ const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
   const signInLogin = useCallback(
     async ({ email, password }: SignInCredentials) => {
       const response = await loginRequest({ email, password });
-
-      const { token, exp } = response.data;
+      if (response.status === 200) {
+        const { token, exp } = response.data;
+        setUserLocalStorage({ token, exp });
+        setData({ token, exp });
+        return true;
+      }
 
       console.log(response);
-      setUserLocalStorage({ token, exp });
-
-      setData({ token, exp });
+      return false;
     },
     []
   );
@@ -49,7 +51,7 @@ const AuthProvider: React.FC<IAuthProvider> = ({ children }) => {
     localStorage.removeItem("@u:exp");
 
     setData({} as AuthState);
-    navigate("/")
+    navigate("/");
   }, []);
 
   return (
