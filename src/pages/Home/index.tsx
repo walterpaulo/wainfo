@@ -6,14 +6,11 @@ import { useAuth } from "../../ shared /hooks/Auth";
 import { Container } from "./style";
 
 export const Home = () => {
-  const auth = useAuth()
+  const auth = useAuth();
 
   return (
     <LayoutProtect>
-      <Container>
-        <button onClick={auth.signOut}>Sair</button>
-        <Link to="/newUser">Novo Usuário</Link>
-      </Container>
+      <Container>home</Container>
     </LayoutProtect>
   );
 };

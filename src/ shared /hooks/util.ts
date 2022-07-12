@@ -17,20 +17,27 @@ export const createUser = async (user: object) => {
 export function getUserLocalStorage() {
   const tokenJson = localStorage.getItem("@u:token");
   const expJson = localStorage.getItem("@u:exp");
+  const islgggJson = localStorage.getItem("@u:islggg");
 
-  if (!tokenJson || !expJson) {
+  if (!tokenJson || !expJson || !islgggJson) {
     return null;
   }
 
   const token = JSON.parse(tokenJson);
   const exp = JSON.parse(expJson);
+  const islggg = JSON.parse(islgggJson);
 
-  return { token, exp };
+  return { token, exp, islggg };
 }
 
-export function setUserLocalStorage(obj: { token: string; exp: string }) {
+export function setUserLocalStorage(obj: {
+  token: string;
+  exp: string;
+  islggg: boolean;
+}) {
   localStorage.setItem("@u:token", JSON.stringify(obj.token));
   localStorage.setItem("@u:exp", JSON.stringify(obj.exp));
+  localStorage.setItem("@u:islggg", JSON.stringify(obj.islggg));
 }
 
 export const loginRequest = async (user: object) => {
