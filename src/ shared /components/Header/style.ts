@@ -42,20 +42,28 @@ export const Avatar = styled.div`
   color: var(--secondary-bg-color);
   font-weight: bold;
   background-color: var(--bg-color);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   cursor: pointer;
+  
+  :hover {
+    div {
+      display: flex;
+    }
+  }
 `;
 export const PerfilUser = styled.div`
+  display: none;
   background-color: var(--text-color-secondary);
   position: absolute;
-  top: 40px;
+  top: 28px;
   right: 4px;
   color: var(--bg-color);
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   padding: 1em 0;
 
@@ -69,7 +77,7 @@ export const PerfilUser = styled.div`
         text-decoration: none;
         color: var(--bg-color);
         font-weight: 400;
-        width: 100%;
+        padding: 0 1.9em;
         :hover {
           color: var(--text-color-secondary);
         }

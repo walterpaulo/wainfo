@@ -7,33 +7,29 @@ import { Avatar, Container, HeaderBox, PerfilUser } from "./style";
 
 export const Header = () => {
   const auth = useAuth();
-  const [isPerfil, setIsPerfil] = useState(false);
 
-  const showPerfil = () => {
-    setIsPerfil(!isPerfil);
-  };
   return (
     <Container>
       <HeaderBox>
-        <Text2 size="40px" color="var(--bg-color)">
-          wainfo
-        </Text2>
+        <Link to="/home">
+          <Text2 size="40px" color="var(--bg-color)">
+            wainfo
+          </Text2>
+        </Link>
         <div>
           {auth.islogged && (
-            <Avatar onClick={showPerfil}>
+            <Avatar>
               wp
-              {isPerfil && (
-                <PerfilUser>
-                  <ul>
-                    <li>
-                      <Link to="/newUser">Editar</Link>
-                    </li>
-                    <li>
-                      <button onClick={auth.signOut}>Sair</button>
-                    </li>
-                  </ul>
-                </PerfilUser>
-              )}
+              <PerfilUser>
+                <ul>
+                  <li>
+                    <Link to="/newUser">Editar</Link>
+                  </li>
+                  <li>
+                    <button onClick={auth.signOut}>Sair</button>
+                  </li>
+                </ul>
+              </PerfilUser>
             </Avatar>
           )}
         </div>
