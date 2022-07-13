@@ -18,6 +18,11 @@ interface SignUnFormData {
   password: string;
 }
 
+type TProp = {
+  text: string;
+  type?: "success" | "error" | "info";
+};
+
 const schema = Yup.object().shape({
   name: Yup.string().required("Nome é obrigatório"),
   email: Yup.string().email().required("Email obrigatório"),
@@ -26,7 +31,7 @@ const schema = Yup.object().shape({
 
 function Signup() {
   const formRef = useRef<FormHandles>(null);
-  const [errors, setErros] = useState("");
+  const [message, setMessage] = useState<TProp>({ text: "", type: "info" });
   let navigate = useNavigate();
 
   async function handleSubmit(data: SignUnFormData) {
@@ -35,16 +40,18 @@ function Signup() {
         abortEarly: false,
       });
       const res = createUser(data);
-      setErros("");
+      setMessage({ text: "", type: "info" });
       res
         .then((res) => {
           if (res.status === 401) {
             // `Email de usuários ou Senha incorreta. Tente novamente!`
-            return setErros(res.data.errors);
+            return setMessage({ text: res.data.errors, type: "error" });
           }
           console.log(res.data.email[0]);
-          res.status === 422 && setErros(res.data.email[0]);
-          res.status === 201 && setErros("Cadastro com sucesso!");
+          res.status === 422 &&
+            setMessage({ text: res.data.email[0], type: "error" });
+          res.status === 201 &&
+            setMessage({ text: "Cadastro com sucesso!", type: "success" });
         })
         .catch((e) => {});
       formRef.current?.reset();
@@ -62,7 +69,7 @@ function Signup() {
     <Layout>
       <Container>
         <Text4>Criar nova conta</Text4>
-        <Message text={errors} />
+        <Message text={message.text} type={message.type} />
         <Form ref={formRef} onSubmit={handleSubmit}>
           <InputBox name="name" type="text" placeholder="Nome" />
           <InputBox name="email" type="text" placeholder="Email" />
