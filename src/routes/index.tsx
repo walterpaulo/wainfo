@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { useAuth } from "../ shared /hooks/Auth";
 import { Home, NewUser } from "../pages";
+import EditUser from "../pages/EditUser";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 
@@ -14,6 +15,7 @@ export const MainRoutes = () => {
         <>
           <Route path="/" element={<Home />} />
           <Route path="/newUser" element={<NewUser />} />
+          <Route path="/editUser" element={<EditUser />} />
           <Route path="*" element={<Home />} />
         </>
       ) : (

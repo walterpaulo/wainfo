@@ -23,7 +23,7 @@ export const Header = () => {
               <PerfilUser>
                 <ul>
                   <li>
-                    <Link to="/newUser">
+                    <Link to="/editUser">
                       <FaUserEdit />
                       Editar
                     </Link>
