@@ -10,15 +10,19 @@ export const MainRoutes = () => {
   return (
     <Routes>
       signup
-      <Route path="/" element={<Signin />} />
-      <Route path="/signup" element={<Signup />} />
-      {auth.islogged && (
+      {auth.islogged ? (
         <>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/newUser" element={<NewUser />} />
+          <Route path="*" element={<Home />} />
+        </>
+      ) : (
+        <>
+          <Route path="/" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="*" element={<Signin />} />
         </>
       )}
-      <Route path="*" element={<Signin />} />
     </Routes>
   );
 };
