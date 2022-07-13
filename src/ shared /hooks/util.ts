@@ -18,16 +18,22 @@ export function getUserLocalStorage() {
   const tokenJson = localStorage.getItem("@u:token");
   const expJson = localStorage.getItem("@u:exp");
   const islgggJson = localStorage.getItem("@u:islggg");
+  const userJson = localStorage.getItem("@u:ub");
 
-  if (!tokenJson || !expJson || !islgggJson) {
+  if (!tokenJson || !expJson || !islgggJson || !userJson) {
     return null;
   }
 
   const token = JSON.parse(tokenJson);
   const exp = JSON.parse(expJson);
   const islggg = JSON.parse(islgggJson);
+  const userObject = JSON.parse(userJson);
 
-  return { token, exp, islggg };
+  return { token, exp, islggg, userObject };
+}
+
+export function setUserCurrentStorage(obj: object) {
+  localStorage.setItem("@u:ub", JSON.stringify(obj));
 }
 
 export function setUserLocalStorage(obj: {
@@ -46,6 +52,21 @@ export const loginRequest = async (user: object) => {
     body: JSON.stringify(user),
     headers: {
       "Content-type": "application/json",
+    },
+  });
+  const data = await response.json();
+  const status = response.status;
+
+  return { data, status };
+};
+
+export const userAuthorized = async (token?: string) => {
+  const getLocal = getUserLocalStorage();
+  const response = await fetch(`${api}/user`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: "Bearer " + (getLocal?.token || token),
     },
   });
   const data = await response.json();

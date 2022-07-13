@@ -11,6 +11,7 @@ export const MainRoutes = () => {
     <Routes>
       signup
       <Route path="/" element={<Signin />} />
+      <Route path="/signup" element={<Signup />} />
       {auth.islogged && (
         <>
           <Route path="/home" element={<Home />} />

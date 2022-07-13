@@ -12,3 +12,10 @@ export interface AuthState {
 export interface IAuthProvider {
   children: JSX.Element;
 }
+
+export interface IUserCurrent{
+  id: number; 
+  name: string;
+  email: string;
+  status: boolean;
+}

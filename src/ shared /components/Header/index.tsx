@@ -8,7 +8,6 @@ import { Avatar, Container, HeaderBox, PerfilUser } from "./style";
 
 export const Header = () => {
   const auth = useAuth();
-
   return (
     <Container>
       <HeaderBox>
@@ -20,7 +19,7 @@ export const Header = () => {
         <div>
           {auth.islogged && (
             <Avatar>
-              wp
+              {auth.userCurrent.name.substring(0, 2)}
               <PerfilUser>
                 <ul>
                   <li>
