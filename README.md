@@ -1,6 +1,6 @@
 ## Wainfo
 
-- Login de acesso;
+- Login de acesso[( Vídeo )](https://youtu.be/dWkWD34K1bY);
 - Rotas protegidas;
 - Validação com Token;
 - Design responsivo;
